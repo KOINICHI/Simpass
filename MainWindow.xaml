@@ -1,0 +1,114 @@
+﻿<Window x:Class="Simpass.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Simpass"
+        mc:Ignorable="d"
+        Title="Simpass" Height="490" Width="800"
+        Closing="Window_Closing" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+    <Window.Resources>
+        <Style TargetType="Window">
+            <Setter Property="FontFamily" Value="Malgun Gothic" />
+        </Style>
+    </Window.Resources>
+    <Grid Name="LayoutRootGrid" Margin="10" Background="White" >
+        <Grid.Effect>
+            <DropShadowEffect Color="Black" Direction="270" BlurRadius="15" ShadowDepth="3" />
+        </Grid.Effect>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Name="LeftMainGrid" Background="#FFBB9B5A">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45" />
+                    <ColumnDefinition Width="45" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Width="30" Name="AddButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                    <Image Source="./AddBtn.png" Stretch="Uniform" />
+                </Button>
+                <Button Grid.Column="1" Width="30" Name="ConfigButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                    <Image Source="./ConfigBtn.png" Stretch="Uniform" />
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="White">
+                    <TextBox Name="Search" FontSize="18" BorderThickness="0" Padding="0,3,0,0" />
+                </Grid>
+                <StackPanel Grid.Row="1" Name="PasswordList">
+                    
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Name="RightMainGrid" Background="#FFFFFFFF" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="-1,0,0,0" Background="#FFBB9B5A" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="45" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Width="30" Name="ExitButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                    <Image Source="./ExitBtn.png" Stretch="Uniform" />
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1" Name="PasswordEdit" Margin="-1,0,0,0"  Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="0" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Name="PasswordEditName" Margin="0,10,10,10" >
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Name="PasswordEditUsername" Margin="0,0,10,10" >
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Name="PasswordEditPassword" Margin="0,0,10,10" >
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Name="PasswordEditWebsite" Margin="0,0,10,10" >
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Name="PasswordEditNote" Margin="0,0,10,10" >
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="5" Name="PasswordEditTag" Margin="0,0,10,10" >
+
+                </StackPanel>
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Name="PasswordEditMetadata" Margin="0,0,10,10" >
+
+                    </StackPanel>
+                    <Button Grid.Column="1" Width="40" Name="DeleteButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0" Visibility="Collapsed">
+                        <Image Source="./DeleteBtn.png" Stretch="Uniform" />
+                    </Button>
+                </Grid>
+                <StackPanel Grid.Row="7">
+                    <Label Name="passwordHashCode" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
