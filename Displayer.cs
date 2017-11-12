@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Simpass
 {
@@ -45,7 +46,12 @@ namespace Simpass
 				passwordList.Add(label);
 			}
 		}
-		
+
+		public void DisplayCurrentPassword()
+		{
+			DisplayPasswordEdit(currentPassword);
+		}
+
 		public void DisplayPasswordEdit(Password password)
 		{
 			currentPassword = password;
@@ -54,32 +60,17 @@ namespace Simpass
 
 			ClearPasswordEdit();
 
-			TextBox nameTextBox = createPasswordFieldTextBox(password.name, 22, 33);
-			nameTextBox.Name = "passwordEditNameTextBox";
-			mainWindow.PasswordEditName.Children.Add(nameTextBox);
+			mainWindow.passwordEditNameTextBox.Text = currentPassword.name;
 
-			TextBox usernameTextBox = createPasswordFieldTextBox(password.username);
-			usernameTextBox.Name = "passwordEditUsernameTextBox";
-			mainWindow.PasswordEditUsername.Children.Add(usernameTextBox);
+			mainWindow.passwordEditUsernameTextBox.Text = password.username;
 
-			TextBox passwordTextBox = createPasswordFieldTextBox(password.password);
-			passwordTextBox.Name = "passwordEditPasswordTextBox";
-			mainWindow.PasswordEditPassword.Children.Add(passwordTextBox);
+			mainWindow.passwordEditPasswordTextBox.Text = currentPassword.password;
 
-			TextBox websiteTextBox = createPasswordFieldTextBox(password.website);
-			websiteTextBox.Name = "passwordEditWebsiteTextBox";
-			mainWindow.PasswordEditWebsite.Children.Add(websiteTextBox);
+			mainWindow.passwordEditWebsiteTextBox.Text = password.website;
+			
+			mainWindow.passwordEditNoteTextBox.Text = password.note;
 
-			TextBox noteTextBox = createPasswordFieldTextBox(password.note);
-			noteTextBox.Height = 81;
-			noteTextBox.BorderThickness = new Thickness(1);
-			noteTextBox.Padding = new Thickness(3);
-			noteTextBox.Name = "passwordEditNoteTextBox";
-			mainWindow.PasswordEditNote.Children.Add(noteTextBox);
-
-			TextBox tagTextBox = createPasswordFieldTextBox(String.Join(", ", password.tags));
-			tagTextBox.Name = "passwordEditTagTextBox";
-			mainWindow.PasswordEditTag.Children.Add(tagTextBox);
+			mainWindow.passwordEditTagTextBox.Text = String.Join(", ", password.tags);
 
 			Label lastModifiedLabel = new Label();
 			lastModifiedLabel.Content = password.modified.ToString();
@@ -88,39 +79,24 @@ namespace Simpass
 			lastModifiedLabel.VerticalAlignment = VerticalAlignment.Center;
 			mainWindow.PasswordEditMetadata.Children.Add(lastModifiedLabel);
 
-			mainWindow.DeleteButtonImage.Visibility = Visibility.Visible;
+			mainWindow.PasswordEdit.Visibility = Visibility.Visible;
 		}
 
 		public void displayStartup()
 		{
+			mainWindow.PasswordEdit.Visibility = Visibility.Collapsed;
 			ClearPasswordEdit();
 		}
 
 		private void ClearPasswordEdit()
 		{
-			mainWindow.PasswordEditName.Children.Clear();
-			mainWindow.PasswordEditUsername.Children.Clear();
-			mainWindow.PasswordEditPassword.Children.Clear();
-			mainWindow.PasswordEditWebsite.Children.Clear();
-			mainWindow.PasswordEditNote.Children.Clear();
-			mainWindow.PasswordEditTag.Children.Clear();
+			mainWindow.passwordEditNameTextBox.Text = "Name";
+			mainWindow.passwordEditUsernameTextBox.Text = "Username";
+			mainWindow.passwordEditPasswordTextBox.Text = "Password";
+			mainWindow.passwordEditWebsiteTextBox.Text = "https://";
+			mainWindow.passwordEditNoteTextBox.Text = "Notes";
+			mainWindow.passwordEditTagTextBox.Text = "Tags";
 			mainWindow.PasswordEditMetadata.Children.Clear();
-			mainWindow.DeleteButtonImage.Visibility = Visibility.Collapsed;
-		}
-		
-		private TextBox createPasswordFieldTextBox(string text, double fontSize = 18, double height = 27)
-		{
-			TextBox textBox = new TextBox();
-			textBox.Text = text;
-			textBox.FontSize = fontSize;
-			textBox.Width = 530.0;
-			textBox.Height = height;
-			textBox.VerticalAlignment = VerticalAlignment.Center;
-			textBox.Margin = new Thickness(30, 0, 0, 0);
-			textBox.BorderThickness = new Thickness(0, 0, 0, 1);
-			textBox.TextChanged += mainWindow.passwordEdit_TextChanged;
-
-			return textBox;
 		}
 	}
 	

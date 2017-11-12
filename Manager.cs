@@ -11,11 +11,19 @@ namespace Simpass
 		public List<Password> passwords;
 
 		private Config config;
+		private List<char> symbolPool;
+		private List<char> alphabetPool;
+		private List<char> numberPool;
+		private List<char> alphaNumericPool;
 
 		public Manager()
 		{
 			passwords = new List<Password>();
 			config = Config.Instance;
+			symbolPool = new List<char> ("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+			alphabetPool = new List<char> ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+			numberPool = new List<char> ("0123456789");
+			alphaNumericPool = new List<char> ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
 			loadEverything();
 		}
 
@@ -24,28 +32,31 @@ namespace Simpass
 			saveEverything();
 		}
 
-		public string GeneratePassword(Config config)
+		public string GeneratePassword()
 		{
-			StringBuilder sb = new StringBuilder();
+			Random rand = new Random();
 
-			List<char> charPool = new List<char>();
-			for (int i = Char.MinValue; i <= Char.MaxValue; i++)
+			List<char> filteredSymbolPool = new List<char>();
+			foreach (char c in symbolPool)
 			{
-				char c = Convert.ToChar(i);
 				if (!Char.IsControl(c) && !config.disallowedSymbols.Contains(c))
 				{
-					charPool.Add(c);
+					filteredSymbolPool.Add(c);
 				}
 			}
-
-			Random rand = new Random();
+			List<char> unshuffled = new List<char>();
 			for (int i = 0; i < config.numberOfSymbols; i++)
 			{
-				int idx = rand.Next(charPool.Count);
-				sb.Append(charPool[idx]);
+				int idx = rand.Next(symbolPool.Count);
+				unshuffled.Add(filteredSymbolPool[idx]);
+			}
+			for (int i = 0; i < config.passwordLength - config.numberOfSymbols; i++)
+			{
+				int idx = rand.Next(alphaNumericPool.Count);
+				unshuffled.Add(alphaNumericPool[idx]);
 			}
 
-			return sb.ToString();
+			return String.Join("", unshuffled.OrderBy(x => rand.Next()));
 		}
 		
 		public void addPassword(Password password)

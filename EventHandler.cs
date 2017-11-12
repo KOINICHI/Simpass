@@ -12,18 +12,38 @@ namespace Simpass
 	{
 		private void AddEventHandlers()
 		{
+			HomeButtonImage.Click += HomeButtonImage_Click;
 			ExitButtonImage.Click += ExitButtonImage_Click;
 			AddButtonImage.Click += AddButtonImage_Click;
 			ConfigButtonImage.Click += ConfigButtonImage_Click;
 			DeleteButtonImage.Click += DeleteButtonImage_Click;
+			GenerateButtonImage.Click += GenerateButtonImage_Click;
+			passwordEditNameTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+			passwordEditUsernameTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+			passwordEditPasswordTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+			passwordEditWebsiteTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+			passwordEditNoteTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+			passwordEditTagTextBox.PreviewTextInput += passwordEdit_PreviewTextInput;
+
 		}
 
-		void ExitButtonImage_Click(object sender, EventArgs e)
+		private void HomeButtonImage_Click(object sender, RoutedEventArgs e)
+		{
+			displayer.displayStartup();
+		}
+
+		private void GenerateButtonImage_Click(object sender, RoutedEventArgs e)
+		{
+			displayer.currentPassword.password = manager.GeneratePassword();
+			displayer.DisplayCurrentPassword();
+		}
+
+		private void ExitButtonImage_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
 
-		void AddButtonImage_Click(object sender, EventArgs e)
+		private void AddButtonImage_Click(object sender, EventArgs e)
 		{
 			Password password = new Password();
 			manager.addPassword(password);
@@ -32,7 +52,7 @@ namespace Simpass
 			displayer.DisplayPasswordList(manager.passwords);
 		}
 
-		void ConfigButtonImage_Click(object sender, EventArgs e)
+		private void ConfigButtonImage_Click(object sender, EventArgs e)
 		{
 		}
 
@@ -42,25 +62,25 @@ namespace Simpass
 			displayer.DisplayPasswordEdit((Password)label.DataContext);
 		}
 
-		public void passwordEdit_TextChanged(object sender, EventArgs e)
+		private void passwordEdit_PreviewTextInput(object sender, EventArgs e)
 		{
 			Guid id = (Guid)PasswordEdit.DataContext;
 			foreach (Password password in manager.passwords)
 			{
 				if (password.id == id)
 				{
-					password.name = ((TextBox)PasswordEditName.Children[0]).Text;
-					password.username = ((TextBox)PasswordEditUsername.Children[0]).Text;
-					password.password = ((TextBox)PasswordEditPassword.Children[0]).Text;
-					password.website = ((TextBox)PasswordEditWebsite.Children[0]).Text;
-					password.note = ((TextBox)PasswordEditNote.Children[0]).Text;
-					password.tags = new List<String>(((TextBox)PasswordEditTag.Children[0]).Text.Split(','));
+					password.name = passwordEditNameTextBox.Text;
+					password.username = passwordEditUsernameTextBox.Text;
+					password.password = passwordEditPasswordTextBox.Text;
+					password.website = passwordEditWebsiteTextBox.Text;
+					password.note = passwordEditNoteTextBox.Text;
+					password.tags = new List<String>(passwordEditTagTextBox.Text.Split(','));
 				}
 			}
 			displayer.DisplayPasswordList(manager.passwords);
 		}
 
-		void DeleteButtonImage_Click(object sender, RoutedEventArgs e)
+		private void DeleteButtonImage_Click(object sender, RoutedEventArgs e)
 		{
 			manager.deletePassword(displayer.currentPassword);
 			displayer.DisplayPasswordList(manager.passwords);

@@ -14,8 +14,7 @@ namespace Simpass
 		public string website;
 		public string note;
 		public List<string> tags;
-
-		public List<string> oldPasswords;
+		
 		public DateTime created;
 		public DateTime modified;
 
@@ -29,8 +28,7 @@ namespace Simpass
 			website = "https://";
 			note = "Note";
 			tags = new List<string>();
-
-			oldPasswords = new List<string>();
+			
 			created = DateTime.Now;
 			modified = DateTime.Now;
 

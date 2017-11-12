@@ -29,11 +29,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="45" />
                     <ColumnDefinition Width="45" />
+                    <ColumnDefinition Width="45" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Width="30" Name="AddButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                <Button Grid.Column="0" Width="30" Name="HomeButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                    <Image Source="./HomeBtn.png" Stretch="Uniform" />
+                </Button>
+                <Button Grid.Column="1" Width="30" Name="AddButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
                     <Image Source="./AddBtn.png" Stretch="Uniform" />
                 </Button>
-                <Button Grid.Column="1" Width="30" Name="ConfigButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
+                <Button Grid.Column="2" Width="30" Name="ConfigButtonImage" Margin="0,0,0,0" Background="Transparent" BorderThickness="0">
                     <Image Source="./ConfigBtn.png" Stretch="Uniform" />
                 </Button>
             </Grid>
@@ -64,7 +68,10 @@
                     <Image Source="./ExitBtn.png" Stretch="Uniform" />
                 </Button>
             </Grid>
-            <Grid Grid.Row="1" Name="PasswordEdit" Margin="-1,0,0,0"  Background="White">
+            <Grid Grid.Row="1" Name="PasswordEditStartup" Margin="-1,0,0,0" Background="White">
+                <Label Content="hihi" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+            </Grid>
+            <Grid Grid.Row="1" Name="PasswordEdit" Margin="-1,0,0,0"  Background="White" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80" />
                     <RowDefinition Height="50" />
@@ -76,22 +83,37 @@
                     <RowDefinition Height="0" />
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Name="PasswordEditName" Margin="0,10,10,10" >
-                    
+                    <TextBox Name="passwordEditNameTextBox" Width="530" Height="33" FontSize="22" Margin="30,0,0,0" VerticalAlignment="Center" BorderThickness="0,0,0,1">
+                        Name
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="1" Name="PasswordEditUsername" Margin="0,0,10,10" >
-
+                    <TextBox Name="passwordEditUsernameTextBox" Width="530" Height="27" FontSize="18" Margin="30,0,0,0" VerticalAlignment="Center" BorderThickness="0,0,0,1">
+                        Username
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Name="PasswordEditPassword" Margin="0,0,10,10" >
-
+                    <Button Width="30" Name="GenerateButtonImage" Margin="30,0,0,0" Background="Transparent" BorderThickness="0">
+                        <Image Source="./KeyBtn.png" Stretch="Uniform" />
+                    </Button>
+                    <TextBox Name="passwordEditPasswordTextBox" Width="500" Height="27" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" BorderThickness="0,0,0,1">
+                        Password
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Name="PasswordEditWebsite" Margin="0,0,10,10" >
-
+                    <TextBox Name="passwordEditWebsiteTextBox" Width="530" Height="27" FontSize="18" Margin="30,0,0,0" VerticalAlignment="Center" BorderThickness="0,0,0,1">
+                        https://
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="4" Name="PasswordEditNote" Margin="0,0,10,10" >
-
+                    <TextBox Name="passwordEditNoteTextBox" Width="530" Height="81" FontSize="18" Margin="30,0,0,0" VerticalAlignment="Center" BorderThickness="1" Padding="3">
+                        Note
+                    </TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="5" Name="PasswordEditTag" Margin="0,0,10,10" >
-
+                    <TextBox Name="passwordEditTagTextBox" Width="530" Height="27" FontSize="18" Margin="30,0,0,0" VerticalAlignment="Center" BorderThickness="0,0,0,1">
+                        
+                    </TextBox>
                 </StackPanel>
                 <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
